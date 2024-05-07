@@ -1,0 +1,17 @@
+{
+  "name": "school_theburningmonk",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A brief description of your project.",
+  "main": "index.js",
+  "scripts": {
+    "sls": "sls"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless": "2.4.0",
+    "serverless-appsync-plugin": "^1.4.0"
+  }
+}
