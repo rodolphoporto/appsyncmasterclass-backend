@@ -1,5 +1,5 @@
 {
-  "name": "school_theburningmonk",
+  "name": "appsyncmasterclass-backend",
   "private": true,
   "version": "1.0.0",
   "description": "A brief description of your project.",
@@ -7,9 +7,17 @@
   "scripts": {
     "sls": "sls"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodolphoporto/appsyncmasterclass-backend.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodolphoporto/appsyncmasterclass-backend.git/issues"
+  },
+  "homepage": "https://github.com/rodolphoporto/appsyncmasterclass-backend#readme",
   "devDependencies": {
     "serverless": "2.4.0",
     "serverless-appsync-plugin": "^1.4.0"
