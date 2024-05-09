@@ -1,9 +1,13 @@
 service: appsyncmasterclass-backend
 frameworkVersion: '2'
 
+plugins:
+  - serverless-appsync-plugin
+
 provider:
   name: aws
   runtime: nodejs12.x
+  region: us-east-1
 
 package:
   exclude:
@@ -14,15 +18,39 @@ custom:
   appSync:
     - ${file(serverless.appsync-api.yml)}
 
+resources:
+ Resources:
+    CongnitoUserPool:
+      Type: AWS::Cognito::UserPool
+      Properties:
+        AutoVerifiedAttributes:
+          - email
+        Policies:
+          PasswordPolicy:
+            MinimumLength: 8
+            RequireLowercase: false
+            RequireNumbers: false            
+            RequireUppercase: false
+            RequireSymbols: false
+        UsernameAttributes:
+          - email
+        Schema:
+          - AttributeDataType: String
+            Name: email
+            Required: false
+            Mutable: true
+            
+    WebUserPoolClient:
+      Type: AWS::Cognito::UserPoolClient
+      Properties:        
+        UserPoolId: !Ref CongnitoUserPool
+        ClientName: web
+        ExplicitAuthFlows:
+          - ALLOW_USER_SRP_AUTH
+          - ALLOW_USER_PASSWORD_AUTH
+          - ALLOW_REFRESH_TOKEN_AUTH
+        PreventUserExistenceErrors: ENABLED
 
-# you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
+ Outputs:
+  CongnitoUserPoolId:
+    Value: !Ref CongnitoUserPool  
